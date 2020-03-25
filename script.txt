@@ -1,0 +1,21 @@
+# 카프카 설치경로
+cd D:\util\kafka_2.12-2.4.1\bin\windows\
+# 토픽생성
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 3 --partitions 3 --topic test2
+# 토픽리스트
+kafka-topics.bat --list --zookeeper localhost:2181
+
+# 메시지 보내기
+kafka-console-producer.bat --broker-list localhost:9093 --topic test 
+
+# 메시지 받기
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning 
+
+# 파티션 수에 따른 메시지 순서 테스트
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 8 --topic test8
+
+# 파티션 메시지 보내기
+kafka-console-producer.bat --broker-list localhost:9092 --topic test8
+
+# 파티션 메시지 가져오기
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test8 --from-beginning 
